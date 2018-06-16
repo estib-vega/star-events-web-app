@@ -46,7 +46,7 @@ function jsonGet (res, render=false) {
     
     sql.query(query, (err, results, fields) => {
         if (err) {
-            console.log(err);
+            // console.log(err);
             // res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
             if (!render) {
                 res.json([])
@@ -89,7 +89,7 @@ function addEntry (res, date, loc, listedObjs) {
 
     sql.query(qry, [date, loc], (err, results, fields) => {
         if (err) {
-            console.log(err);
+           // console.log(err);
            // res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
            res.json([])
            return
@@ -123,7 +123,7 @@ function deleteEntry (res, id) {
 
     sql.query(deleteQ, [id], (err, results, fields) => {
         if (err) {
-            console.log(err);
+           // console.log(err);
            // res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
            res.json([]) 
            return
@@ -152,8 +152,8 @@ function editEntry (res, id, date, loc, listedObjs) {
      const editQ = "UPDATE event_entries SET EventDate=?, EventLoc=? WHERE EventId=?";
      sql.query(editQ, [date, loc, id], (err, results, fields) => {
          if (err) {
-            console.log(err);
-            res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
+            // console.log(err);
+            // res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
             return
          }
  
