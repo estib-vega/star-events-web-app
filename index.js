@@ -30,7 +30,6 @@ function getConnection () {
         user: 'root',
         database: 'db_projekt',
         password: 'Asd123@Asd456'
-
     })
 }
 
@@ -48,8 +47,14 @@ function jsonGet (res, render=false) {
     sql.query(query, (err, results, fields) => {
         if (err) {
             console.log(err);
-            res.sendStatus(500)
-            res.end()
+            // res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
+            if (!render) {
+                res.json([])
+            } else {
+                res.render("entry", {
+                    jsonResults: []
+                })
+            }
             return
         }
 
@@ -85,9 +90,9 @@ function addEntry (res, date, loc, listedObjs) {
     sql.query(qry, [date, loc], (err, results, fields) => {
         if (err) {
             console.log(err);
-            res.sendStatus(500)
-            res.end()
-            return
+           // res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
+           res.json([])
+           return
         }
         id = results.insertId;
 
@@ -119,9 +124,9 @@ function deleteEntry (res, id) {
     sql.query(deleteQ, [id], (err, results, fields) => {
         if (err) {
             console.log(err);
-            res.sendStatus(500)
-            res.end()
-            return
+           // res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
+           res.json([]) 
+           return
         }
         const delteEntry = "DELETE FROM event_entries WHERE EventId=?"
 
@@ -147,10 +152,9 @@ function editEntry (res, id, date, loc, listedObjs) {
      const editQ = "UPDATE event_entries SET EventDate=?, EventLoc=? WHERE EventId=?";
      sql.query(editQ, [date, loc, id], (err, results, fields) => {
          if (err) {
-             console.log(err);
-             res.sendStatus(500)
-             res.end()
-             return
+            console.log(err);
+            res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
+            return
          }
  
          // delete all event objects with given event id 
