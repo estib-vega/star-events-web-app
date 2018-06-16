@@ -47,7 +47,7 @@ function jsonGet (res, render=false) {
     sql.query(query, (err, results, fields) => {
         if (err) {
             console.log(err);
-            //res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
+            // res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
             if (!render) {
                 res.json([])
             } else {
@@ -91,13 +91,7 @@ function addEntry (res, date, loc, listedObjs) {
         if (err) {
             console.log(err);
            // res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
-           if (!render) {
-                res.json([])
-            } else {
-                res.render("entry", {
-                    jsonResults: []
-                })
-            }
+           res.json([])
            return
         }
         id = results.insertId;
@@ -131,13 +125,7 @@ function deleteEntry (res, id) {
         if (err) {
             console.log(err);
            // res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
-           if (!render) {
-                res.json([])
-            } else {
-                res.render("entry", {
-                    jsonResults: []
-                })
-            } 
+           res.json([]) 
            return
         }
         const delteEntry = "DELETE FROM event_entries WHERE EventId=?"
