@@ -246,3 +246,13 @@ h1 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   color: #444;
 }
+#los_a {
+  top: 55px;
+  background-color: #0068df;
+}
+#los_b {
+  top: 90px;
+}
+#los_c {
+  background-color: #0068df;
+}

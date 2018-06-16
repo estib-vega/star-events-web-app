@@ -47,7 +47,14 @@ function jsonGet (res, render=false) {
     sql.query(query, (err, results, fields) => {
         if (err) {
             console.log(err);
-            res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
+            //res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
+            if (!render) {
+                res.json([])
+            } else {
+                res.render("entry", {
+                    jsonResults: []
+                })
+            }
             return
         }
 
@@ -83,8 +90,15 @@ function addEntry (res, date, loc, listedObjs) {
     sql.query(qry, [date, loc], (err, results, fields) => {
         if (err) {
             console.log(err);
-            res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
-            return
+           // res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
+           if (!render) {
+                res.json([])
+            } else {
+                res.render("entry", {
+                    jsonResults: []
+                })
+            }
+           return
         }
         id = results.insertId;
 
@@ -116,8 +130,15 @@ function deleteEntry (res, id) {
     sql.query(deleteQ, [id], (err, results, fields) => {
         if (err) {
             console.log(err);
-            res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
-            return
+           // res.send("<h1 style='font-family: Helvetica;'>Anscheinend gibt es keine MySQL db angeschlossen, bitte konfigurieren Sie eine mithilfe von 'db_statement.txt'</h1>")
+           if (!render) {
+                res.json([])
+            } else {
+                res.render("entry", {
+                    jsonResults: []
+                })
+            } 
+           return
         }
         const delteEntry = "DELETE FROM event_entries WHERE EventId=?"
 
