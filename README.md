@@ -4,6 +4,9 @@ small web app for storing and managing astronomical events
 This is a fullstack node.js web application for the creation, edtion, 
 and deletion of events for astronomical sightings.
 
+IN ORDER FOR IT TO WORK YOU NEED TO START A MYSQL SERVER LOCALLY AND CONFIGURE IT IN THE INDEX.JS
+YOU CAN FIND THE DB STATEMENTS IN THE REPOSITORY
+
 For the persistency it uses MySQL.
 The database is called 'db_prjekt' and contains the tables:
 - event_entries
