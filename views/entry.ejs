@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/main.css">
-    <script src="./js/main.js"></script>
+    <script defer src="./js/main.js"></script>
     <title>Entries</title>
 </head>
 <body>
@@ -48,13 +48,13 @@
     <div class="entry-editor" id="printable">
         <button onclick="handler.handleDeleteEntry()" class="los_b" id="los_b">Entry Löschen</button>
         <a href="" id="los_a_link" target="_blank"><button class="los_b" id="los_a">Fullscreen</button></a>
-        <button class="los_b" id="los_c" onclick="printPage()">Print</button>
+        <button class="los_b" id="los_c" onclick="handler.printPage()">Print</button>
         <div  class="editor-map-container" id="map"></div>
         <div class="editor-input-container">
             <input type="number" name="editor_day" id="editor_day" placeholder="tt" disabled min="1" max="31" onchange="handler.checkMinMax(this)">
             <input type="number" name="editor_month" id="editor_month" placeholder="mm" min="1" max="12"disabled onchange="handler.checkMinMax(this)">
             <input type="number" name="editor_year" id="editor_year" placeholder="jjjj" min="2018" max="2200" disabled onchange="handler.checkMinMax(this)">
-            <input type="text" placeholder="Ort" id="editor_place" onchange="document.getElementById('los_a_link').href='https://www.google.com/maps/search/?api=1&query='+this.value;doSearch(this.value)" disabled>
+            <input type="text" placeholder="Ort" id="editor_place" onchange="handler.placeChange(this.value)" disabled>
             <input type="hidden" id="editor_id">
             <h3>Objekte</h3>
             <div class="editor-object-container" id="editor_objects">
@@ -67,7 +67,7 @@
             <div class="extra-space"></div>
         </div>
     </div>
-    <script>
+    <!-- <script>
 
 
             // This example adds a search box to a map, using the Google Place Autocomplete
@@ -165,25 +165,10 @@
                 initAutocomplete(true, q);
                 }
             }
-            function printPage(){
-                document.getElementById("nonPrintable").style.opacity=0;
-                document.getElementById("printable").style.width = "100%";
-                document.getElementById("printable").style.left = 0;
-                setTimeout(function (){
-                    window.print();
-                }, 2000);
-                setTimeout(function (){
-                  document.getElementById("printable").style.width = "50vw";
-                  document.getElementById("printable").style.left = "50vw";
-                  document.getElementById("nonPrintable").style.opacity=1;
-
-                }, 2500);
-
-            }
       
           </script>
           <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCEkwnCnrH6WiZxridqQhk1kNKssuOft0E&language=de&libraries=places&callback=initAutocomplete"
-               async defer></script>
+               async defer></script> -->
     
     
 </body>

@@ -395,6 +395,30 @@ var objExport = {
         if (elem.value > max) {
             elem.value = max
         }
+    },
+
+    // when the place changes, then automatically change the map,
+    // also change the link of the fullscreen map to the correct one
+    placeChange: function (val) {
+        document.getElementById('los_a_link').href='https://www.google.com/maps/search/?api=1&query='+val;
+        // doSearch(val)
+    },
+
+    // show only the side being edited, and print the window
+    printPage: function () {
+        document.getElementById("nonPrintable").style.opacity=0;
+        document.getElementById("printable").style.width = "100%";
+        document.getElementById("printable").style.left = 0;
+        setTimeout(function () {
+            window.print();
+        }, 2000);
+        setTimeout(function () {
+          document.getElementById("printable").style.width = "50vw";
+          document.getElementById("printable").style.left = "50vw";
+          document.getElementById("nonPrintable").style.opacity=1;
+
+        }, 2500);
+
     }
 
 }
