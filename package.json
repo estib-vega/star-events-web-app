@@ -5,15 +5,21 @@
   "main": "index.js",
   "scripts": {
     "indexlint": "eslint index.js || exit 1",
-    "publiclint": "eslint ./public/js/*.js || exit 1",
-    "lint": "npm run clean && npm run indexlint && npm run publiclint",
-    "minless": "lessc ./compilables/less/main.less ./public/css/main.css",
-    "minbrowserify": "browserify ./compilables/js/main.js -d -s handler > ./public/js/main.js",
-    "min": "npm run minless && npm run minbrowserify",
-    "build": "npm run lint && npm run min",
-    "debug": "npm run lint && nodemon index.js",
-    "start": "npm run build && node index.js",
-    "clean": "rm -f ./public/css/main.css ./public/js/main.js"
+    "publiclint": "eslint ./compilables/js/*.js || exit 1",
+    "lint": "npm run indexlint && npm run publiclint",
+    "css": "lessc compilables/less/main.less public/css/main.css",
+    "js": "browserify ./compilables/js/main.js -d -s handler > ./public/js/main.js",
+    "staticplace": "place views/entry.ejs main.min.css main.css && place views/entry.ejs main.min.js main.js",
+    "minplace": "place views/entry.ejs main.css main.min.css && place views/entry.ejs main.js main.min.js",
+    "static": "mkdir public && mkdir ./public/css && mkdir ./public/js && npm run staticplace && npm run css && npm run js",
+    "cleanp": "rm -rf public",
+    "debug": "npm run cleanp && npm install && npm run lint && npm run static",
+    "clean": "npm run cleanp && rm -rf node_modules",
+    "cssmin": "lessc --clean-css compilables/less/main.less public/css/main.min.css",
+    "jsmin": "npm run js && minify ./public/js/main.js --out-file ./public/js/main.min.js",
+    "staticmin": "npm run static && npm run minplace",
+    "build": "npm run clean && npm run lint && npm install && npm run staticmin && npm run cssmin && npm run jsmin",
+    "start": "node index.js"
   },
   "author": "J. Esteban Vega & Krystian Sereda",
   "license": "ISC",
@@ -25,6 +31,7 @@
     "mysql": "^2.15.0"
   },
   "devDependencies": {
+    "babel-minify": "^0.4.3",
     "browserify": "^16.2.2",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
@@ -34,6 +41,7 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
     "less": "^3.0.4",
+    "less-plugin-clean-css": "^1.5.1",
     "nodemon": "^1.17.5"
   }
 }

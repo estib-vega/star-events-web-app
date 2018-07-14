@@ -1,4 +1,20 @@
 @import "built-ins";
 @import "entry";
 @import "editor";
-@import "animations.css";
+
+/* ------------------- animations --------------- */
+
+.fade-in{
+    animation: fade-in-from-top 500ms ease-out forwards;
+}
+
+@keyframes fade-in-from-top{
+    0%{
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
